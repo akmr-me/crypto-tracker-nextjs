@@ -42,7 +42,7 @@ export default function Carousel() {
     const profit = coin?.price_change_percentage_24h >= 0;
     return (
       <Link
-        href={`/coins/${coin.id}`}
+        href={`/coins/${coin.id}?image=${coin.image}`}
         className="flex flex-col items-center cursor-pointer uppercase text-whitesmoke"
         key={coin.id}
       >

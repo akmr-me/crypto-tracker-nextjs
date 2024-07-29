@@ -2,6 +2,7 @@
 
 import { useCryptoContext } from "@/app/Context/CryptoContext";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Table() {
   const { state: { coins, symbol, local, searchKeyWord } = {} } =
@@ -55,12 +56,13 @@ export default function Table() {
     }
     return TempArr;
   };
+
   const coinsAfterSearch = handleSearch();
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 bg-black text-white lato">
+        <thead className="text-xs bg-black text-white lato">
           <tr>
             <th scope="col" className="px-6 py-6">
               Coin
@@ -91,14 +93,18 @@ export default function Table() {
                     className="px-6 py-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
                     <div className="flex gap-4 items-center">
-                      <img
-                        src={row?.image}
-                        alt={row?.name}
-                        className="h-[50px]"
-                      />
+                      <Link href={`/coins/${row.id}?image=${row.image}`}>
+                        <img
+                          src={row?.image}
+                          alt={row?.name}
+                          className="h-[50px]"
+                        />
+                      </Link>
                       <div className="flex flex-col">
                         <span className="text-xl uppercase">{row.symbol}</span>
-                        <span>{row.name}</span>
+                        <Link href={`/coins/${row.id}?image=${row.image}`}>
+                          <span>{row.name}</span>
+                        </Link>
                       </div>
                     </div>
                   </th>
@@ -111,7 +117,7 @@ export default function Table() {
                   </td>
                   <td className="px-6 py-6 text-right">
                     {" "}
-                    {symbol} {row.market_cap.toLocaleString(local).slice(0, -7)}
+                    {symbol} {row.market_cap.toLocaleString(local).slice(0, -7)}{" "}
                     M
                   </td>
                 </tr>
@@ -150,7 +156,9 @@ export default function Table() {
                 <li key={item}>
                   <button
                     className={`flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${
-                      item === page ? "bg-gray-400 text-white" : ""
+                      item === page
+                        ? "bg-gray-800 text-white dark:bg-white dark:text-black"
+                        : ""
                     }`}
                     onClick={() => handleJumpToPage(item)}
                   >

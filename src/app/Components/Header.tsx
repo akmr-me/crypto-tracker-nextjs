@@ -42,8 +42,8 @@ export default function Header() {
               {/* </a> */}
             </li>
             <li className="">
-              <button className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg border border-customGray m-1">
-                <span className="relative px-4 py-1 dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+              <button className="relative inline-flex items-center justify-center p-1 overflow-hidden text-sm font-medium text-gray-900 rounded-lg border border-customGray m-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <span className="relative px-4 py-1 dark:bg-transparent rounded-md group-hover:bg-opacity-0">
                   Login
                 </span>
               </button>

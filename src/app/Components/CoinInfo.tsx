@@ -64,8 +64,14 @@ export default function CoinInfo({ coin }: ParamsType) {
             let date = new Date(coin[0]);
             let time =
               date.getHours() > 12
-                ? `${date.getHours() - 12}: ${date.getMinutes()} PM`
-                : `${date.getHours()}:${date.getMinutes()} AM`;
+                ? `${date.getHours() - 12}: ${date
+                    .getMinutes()
+                    .toString()
+                    .padEnd(2, "0")} PM`
+                : `${date.getHours()}:${date
+                    .getMinutes()
+                    .toString()
+                    .padEnd(2, "0")} AM`;
             return [
               days === 1 ? time : date.toLocaleDateString(),
               // Formating data since both api's and react google chart data is in diffrent formate
