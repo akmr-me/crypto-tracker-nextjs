@@ -21,6 +21,7 @@ const config: Config = {
         customGray: "#212121",
         whitesmoke: "#f5f5f5",
         "black-rgba-10": "rgba(0, 0, 0, 0.1)",
+        "black-rgba": "rgba(0, 0, 0, 0.5)",
       },
       fontFamily: {
         lato: ["Lato", "sans-serif"],
