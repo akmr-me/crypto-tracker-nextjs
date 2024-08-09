@@ -1,4 +1,4 @@
-import Carousel from "./Carousel";
+import Carousel from "@/app/Components/Banner/Carousel";
 
 export default function Banner() {
   return (

@@ -7,3 +7,12 @@
 .lato {
   font-family: var(--font-lato);
 }
+@layer utilities {
+  .h-max-content {
+    height: max-content;
+  }
+}
+body {
+  /* box-sizing: border-box; */
+  overflow-y: scroll;
+}

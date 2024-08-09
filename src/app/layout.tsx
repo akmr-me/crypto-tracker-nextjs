@@ -3,7 +3,7 @@ import { Inter, Lato } from "next/font/google";
 import "./globals.css";
 import Header from "@/app/Components/Header";
 import ThemeProvider from "@/app/Context/ThemeProvider";
-import CryptoProvider from "./Context/CryptoContext";
+import CryptoProvider from "./Context/app";
 
 const inter = Inter({ subsets: ["latin"] });
 const lato = Lato({

@@ -1,9 +1,11 @@
 "use client";
-import { SET_CURRENCY } from "../Configs/actionTypes";
-import { useCryptoContext } from "../Context/CryptoContext";
-import AuthModal from "./Authentication/AuthModal";
-import Select from "./Select";
-import ThemeSwitch from "./ThemeSwitch";
+import { SET_CURRENCY } from "@/app/Context/app/actionTypes";
+import { useCryptoContext } from "@/app/Context/app";
+import AuthModal from "@/app/Components/Authentication/AuthModal";
+import Drawer from "@/app/Components/common/Drawer";
+import Select from "@/app/Components/common/Select";
+import ThemeSwitch from "@/app/Components/ThemeSwitch";
+import WishList from "@/app/Components/WishList";
 
 export default function Header() {
   const { state, dispatch } = useCryptoContext();
@@ -43,7 +45,13 @@ export default function Header() {
               {/* </a> */}
             </li>
             <li className="">
-              <AuthModal />
+              {state.user ? (
+                <Drawer>
+                  <WishList />
+                </Drawer>
+              ) : (
+                <AuthModal />
+              )}
             </li>
           </ul>
         </div>

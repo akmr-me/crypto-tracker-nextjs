@@ -1,6 +1,35 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { toast } from "sonner";
+import { auth } from "@/app/firebase";
+
 export default function SignUp() {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const { email, password } = Object.fromEntries(formData.entries());
+    toast.promise(
+      createUserWithEmailAndPassword(
+        auth,
+        email.toString(),
+        password.toString()
+      ),
+      {
+        loading: "Signing Up user in...",
+        success: (data) => {
+          return `${
+            data.user.displayName || data.user.email
+          } Logged in successfully!`;
+        },
+        error: (err) => {
+          console.log({ err });
+          return err.message;
+        },
+      }
+    );
+  }
+
   return (
-    <form className="space-y-4" action="#">
+    <form className="space-y-4" action="#" onSubmit={handleSubmit}>
       <div>
         <label
           htmlFor="email"
@@ -49,7 +78,7 @@ export default function SignUp() {
           required
         />
       </div>
-      <div className="flex justify-between">
+      {/* <div className="flex justify-between">
         <div className="flex items-start">
           <div className="flex items-center h-5">
             <input
@@ -73,14 +102,14 @@ export default function SignUp() {
         >
           Lost Password?
         </a>
-      </div>
+      </div> */}
       <button
         type="submit"
         className="w-full text-gray-900 bg-[#ffc107] hover:bg-[#ffcd07] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
         Login to your account
       </button>
-      <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
+      {/* <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
         Have an account?{" "}
         <a
           href="#"
@@ -88,7 +117,7 @@ export default function SignUp() {
         >
           Login here
         </a>
-      </div>
+      </div> */}
     </form>
   );
 }

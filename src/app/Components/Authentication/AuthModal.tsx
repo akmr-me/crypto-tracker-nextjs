@@ -1,7 +1,12 @@
 import { useState } from "react";
-import Login from "./Login";
 import GoogleButton from "react-google-button";
-import { signInWithGoogle } from "@/app/actions";
+import { toast } from "sonner";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import Login from "@/app/Components/Authentication/Login";
+import SignUp from "@/app/Components/Authentication/SignUp";
+import { auth } from "@/app/firebase";
+
+const googleProvider = new GoogleAuthProvider();
 
 export default function AuthModal() {
   const [open, setOpen] = useState(false);
@@ -9,24 +14,26 @@ export default function AuthModal() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  //   const handleChange = (event, newValue) => {
-  //     setValue(newValue);
-  //   };
-
   const oAuthSignIn = () => {
-    signInWithGoogle()
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    toast.promise(signInWithPopup(auth, googleProvider), {
+      loading: "Signing Up user in...",
+      success: (data) => {
+        return `${
+          data.user.displayName || data.user.email
+        } Logged in successfully!`;
+      },
+      error: (err) => {
+        console.log({ err });
+        return err.message;
+      },
+    });
   };
+
   return (
     <div>
       <button
         className="relative inline-flex items-center justify-center p-1 overflow-hidden text-sm font-medium text-gray-900 rounded-lg border border-customGray m-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={handleOpen}
       >
         <span className="relative px-4 py-1 dark:bg-transparent rounded-md group-hover:bg-opacity-0">
           Login
@@ -51,12 +58,25 @@ export default function AuthModal() {
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
             {/* <!-- Modal header --> */}
             <div className="flex items-center bg-[#ffc107] justify-between p-2 md:p-2.5 border-b rounded-t dark:border-gray-600">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+              <h3
+                className={`w-1/2 text-xl text-center font-semibold text-gray-${
+                  value == 0 ? 5 : 9
+                }00 dark:text-white cursor-pointer border-r-2 border-black`}
+                onClick={() => setValue(0)}
+              >
                 Sign in
+              </h3>
+              <h3
+                className={`w-1/2 text-xl text-center font-semibold text-gray-${
+                  value === 1 ? 5 : 9
+                }00 dark:text-white cursor-pointer`}
+                onClick={() => setValue(1)}
+              >
+                Sign Up
               </h3>
               <button
                 type="button"
-                className="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                className="end-2.5 text-gray-900 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                 data-modal-hide="authentication-modal"
                 onClick={handleClose}
               >
@@ -80,7 +100,8 @@ export default function AuthModal() {
             </div>
             {/* <!-- Modal body --> */}
             <div className="p-4 md:p-5 md:pb-0 pb-0">
-              <Login />
+              {value === 1 && <SignUp />}
+              {value === 0 && <Login />}
             </div>
             <div className="p-4 md:p-5 pt-0 md:pt-0">
               <p className="text-center pt-2 pb-2">OR</p>

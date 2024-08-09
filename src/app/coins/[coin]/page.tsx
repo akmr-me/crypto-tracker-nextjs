@@ -1,5 +1,6 @@
 import Coin from "@/app/Components/Coin";
 
+// Dynamic title and favicon for coin page
 export const generateMetadata = ({ params, searchParams }: CoinPageType) => {
   return {
     title: params.coin[0].toUpperCase() + params.coin.slice(1),
@@ -9,10 +10,9 @@ export const generateMetadata = ({ params, searchParams }: CoinPageType) => {
   };
 };
 
-type Coin = string;
 interface CoinPageType {
   params: {
-    coin: Coin;
+    coin: string;
   };
   searchParams: {
     image: string;

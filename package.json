@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:start": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -19,7 +20,8 @@
     "react-dom": "^18",
     "react-google-button": "^0.8.0",
     "react-google-charts": "^4.0.1",
-    "react-icons": "^5.2.1"
+    "react-icons": "^5.2.1",
+    "sonner": "^1.5.0"
   },
   "devDependencies": {
     "@types/node": "^20",

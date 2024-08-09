@@ -1,6 +1,34 @@
+"use client";
+
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { toast } from "sonner";
+import { auth } from "@/app/firebase";
+
 export default function Login() {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+
+    const { email, password } = Object.fromEntries(formData.entries());
+    toast.promise(
+      signInWithEmailAndPassword(auth, email.toString(), password.toString()),
+      {
+        loading: "Logging in...",
+        success: (data) => {
+          return `${
+            data.user.displayName || data.user.email
+          } Logged in successfully!`;
+        },
+        error: (err) => {
+          console.log(err);
+          return "error";
+        },
+      }
+    );
+  }
+
   return (
-    <form className="space-y-4" action="#">
+    <form className="space-y-4" action="#" onSubmit={handleSubmit}>
       <div>
         <label
           htmlFor="email"

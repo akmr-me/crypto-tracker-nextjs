@@ -1,12 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import AliceCarousel from "react-alice-carousel";
-import Image from "next/image";
-import { fetchTrendingCoins } from "@/app/actions";
 import Link from "next/link";
-import { useCryptoContext } from "@/app/Context/CryptoContext";
-import { SET_LOADING } from "@/app/Configs/actionTypes";
-import Skeleton from "../Skeleton";
+import { fetchTrendingCoins } from "@/app/actions";
+import { useCryptoContext } from "@/app/Context/app";
+import { SET_LOADING } from "@/app/Context/app/actionTypes";
+import Skeleton from "@/app/Components/common/Skeleton";
+import Image from "next/image";
 
 const responsive = {
   0: {
@@ -57,11 +57,11 @@ export default function Carousel() {
             },
           }}
         /> */}
-        <img
+        <Image
           src={coin?.image}
           alt={coin?.name}
-          //   width={80}
-          //   height={80}
+          width={80}
+          height={80}
           className="mb-2.5 h-5 sm:h-[80px]"
         />
         <span className="">{coin?.symbol}</span>
@@ -79,7 +79,7 @@ export default function Carousel() {
             {symbol} {coin?.current_price?.toLocaleString(local)}
           </span>
         ) : (
-          <Skeleton width={20} />
+          <Skeleton width="w-[40px]" height="h-[20px]" />
         )}
       </Link>
     );

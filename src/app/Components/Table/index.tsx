@@ -1,8 +1,9 @@
 "use client";
 
-import { useCryptoContext } from "@/app/Context/CryptoContext";
+import { useCryptoContext } from "@/app/Context/app";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Table() {
   const { state: { coins, symbol, local, searchKeyWord } = {} } =
@@ -94,10 +95,11 @@ export default function Table() {
                   >
                     <div className="flex gap-4 items-center">
                       <Link href={`/coins/${row.id}?image=${row.image}`}>
-                        <img
+                        <Image
                           src={row?.image}
                           alt={row?.name}
-                          className="h-[50px]"
+                          width={50}
+                          height={50}
                         />
                       </Link>
                       <div className="flex flex-col">
@@ -157,7 +159,7 @@ export default function Table() {
                   <button
                     className={`flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${
                       item === page
-                        ? "bg-gray-800 text-white dark:bg-white dark:text-black"
+                        ? "!bg-gray-400 text-white dark:bg-white dark:text-black cursor-default"
                         : ""
                     }`}
                     onClick={() => handleJumpToPage(item)}

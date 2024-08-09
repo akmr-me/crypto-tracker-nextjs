@@ -1,3 +1,5 @@
+import { User as FirebaseUser } from "firebase/auth";
+
 export interface CoinType {
   id: string;
   symbol: string;
@@ -164,4 +166,25 @@ export interface MarketData {
 export interface Currency {
   USD: string;
   INR: string;
+}
+
+export interface InitialState {
+  symbol: string;
+  currency: string;
+  local: string;
+  coins: any[]; // Adjust this type as per the actual structure of 'coins'
+  loading: boolean;
+  user: null | FirebaseUser;
+  watchlist: any[]; // Adjust this type as per the actual structure of 'watchlist'
+  alert: {
+    open: boolean;
+    type: string;
+    message: string;
+  };
+  searchKeyWord: string;
+}
+
+export interface ActionType {
+  type: string;
+  payload?: any;
 }

@@ -1,3 +1,4 @@
+// TODO: Make this component generic
 interface ItemType {
   label: string;
   value: string | number;

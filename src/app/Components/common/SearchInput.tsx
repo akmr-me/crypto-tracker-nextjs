@@ -1,7 +1,7 @@
 "use client";
 
-import { SET_SEARCH_KEYWORD } from "../Configs/actionTypes";
-import { useCryptoContext } from "../Context/CryptoContext";
+import { SET_SEARCH_KEYWORD } from "../../Context/app/actionTypes";
+import { useCryptoContext } from "../../Context/app";
 
 export default function SearchInput() {
   const { state: { searchKeyWord } = {}, dispatch } = useCryptoContext();

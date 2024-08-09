@@ -22,9 +22,13 @@ const config: Config = {
         whitesmoke: "#f5f5f5",
         "black-rgba-10": "rgba(0, 0, 0, 0.1)",
         "black-rgba": "rgba(0, 0, 0, 0.5)",
+        customYellow: "#FFC107",
       },
       fontFamily: {
         lato: ["Lato", "sans-serif"],
+      },
+      minHeight: {
+        "screen-minus-64": "calc(100vh - 64px)",
       },
     },
   },
